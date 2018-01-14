@@ -27,7 +27,7 @@ const TemplateWrapper = ({ data, children }) => (
       }}
     >
       <Treeview data={data.allMarkdownRemark}/>
-      <main style={{ marginLeft: 20 }}>{children()}</main>
+      <main style={{ marginLeft: 20, flex: 1 }}>{children()}</main>
     </div>
   </div>
 )

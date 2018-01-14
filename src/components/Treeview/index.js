@@ -4,16 +4,14 @@ import Link from 'gatsby-link'
 export default class Treeview extends Component {
   constructor(props) {
     super(props)
-    const sortedEdges = props.data.edges
-      .sort((a, b) => a.node.frontmatter.path.split('').length > b.node.frontmatter.path.split('').length)
-    const tree = this.constructTree(sortedEdges)
-    console.log(tree)
-    this.state = { tree }
+    this.state = { tree: this.constructTree(props.data.edges) }
+
+    this.renderLink = this.renderLink.bind(this)
+    this.renderNode = this.renderNode.bind(this)
   }
 
   // constructs a nested object based on path
-  constructTree(edges, currentTree = {}) {
-    // we're done! booya!
+  constructTree(edges, currentTree = {}, currentPath = null) {
     if (edges.length === 0) { return currentTree }
     
     const tree = Object.assign({}, currentTree)
@@ -21,30 +19,69 @@ export default class Treeview extends Component {
     const { title, path } = currentEdge.node.frontmatter
     const splitPath = path.split('/').filter(part => part !== '')
     const [currentRoot, ...branches] = splitPath
+
     tree[currentRoot] = Object.assign({}, tree[currentRoot])
     
     if (splitPath.length === 1) {
-      tree[currentRoot].data = { title, path }
+      tree[currentRoot].__data = { title, path: currentPath ? currentPath : path }
     } else {
       currentEdge.node.frontmatter.path = splitPath.slice(1, splitPath.length).join('/')
-      tree[currentRoot] = Object.assign(tree[currentRoot], this.constructTree([currentEdge], tree[currentRoot]))
+      currentPath = currentPath ? currentPath : path
+      tree[currentRoot] = Object.assign(tree[currentRoot], this.constructTree([currentEdge], tree[currentRoot], currentPath))
     }
     return this.constructTree(remainingEdges, tree)
   }
 
-  renderLink(edge) {
-    const { title, path } = edge.node.frontmatter
+  // TODO: refactor & cleanup
+  renderNode([ key, value ]) {
+    if (key === '__data') {
+      return this.renderLink(value)
+    } else if (Object.keys(value).length === 1 && value.__data) {
+      return this.renderLink(value.__data)
+    } else if (value.__data) { 
+      // the path itself has both data and children.
+      const { title, path } = value.__data
+      const newValue = { }
+      Object.keys(value).forEach(key => {
+        if (key !== '__data') { 
+          newValue[key] = value[key]
+        }
+      })
 
+      return (
+        <li key={key}>
+          <Link to={path}>{title}</Link>
+          <ul>
+            {Object.entries(newValue).map(this.renderNode)}
+          </ul>
+        </li>
+      )
+    } else {
+      return (
+        <li key={key}>
+          {key}
+          <ul>
+            {Object.entries(value).map(this.renderNode)}
+          </ul>
+        </li>
+      )
+    }
+  }
+
+  renderLink({ title, path }) {
     return <li key={path}><Link to={path}>{title}</Link></li>
   }
 
   render() {
-    const { edges } = this.props.data
+    const { docs } = this.state.tree
+    console.log(docs)
+
     return (
-      <div>
-        <h3>{edges.length} docs found.</h3>
+      <div style={{ maxWidth: 400 }}>
+        <strong>{this.props.data.edges.length} doc files found.</strong>
+        <br />
         <ul>
-          {edges.map(this.renderLink)}
+          {Object.entries(docs).map(this.renderNode)}
         </ul>
       </div>
     )
