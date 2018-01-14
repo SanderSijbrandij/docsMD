@@ -3,10 +3,9 @@ import Link from 'gatsby-link'
 
 const IndexPage = () => (
   <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h1>Documentation</h1>
+    <p>Woop! Check the tree view to the left to browse documentation :)</p>
+    <p>To add a file, simply create it in the docs folder. Be sure to specify a path in the frontmatter!</p>
   </div>
 )
 

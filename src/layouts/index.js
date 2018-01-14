@@ -9,7 +9,7 @@ import './index.css'
 const TemplateWrapper = ({ data, children }) => (
   <div>
     <Helmet
-      title="Gatsby Default Starter"
+      title="Documentation"
       meta={[
         { name: 'description', content: 'Sample' },
         { name: 'keywords', content: 'sample, something' },
@@ -32,9 +32,8 @@ const TemplateWrapper = ({ data, children }) => (
   </div>
 )
 
-
 export const pageQuery = graphql`
-  query BlogMeta {
+  query DocMeta {
     allMarkdownRemark {
       edges {
         node {
