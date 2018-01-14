@@ -1,13 +1,13 @@
-# gatsby-starter-default
-The default Gatsby starter
+# Documentation
+This project uses GatsbyJS to render markdown files in a subtree to documentation files.
 
-For an overview of the project structure please refer to the [Gatsby documentation - Building with Components](https://www.gatsbyjs.org/docs/building-with-components/)
+## Getting started
+### Running the server
+Run `gatsby develop` to start your development server.
 
-Install this starter (assuming Gatsby is installed) by running from your CLI:
-```
-gatsby new gatsby-example-site
-```
+### Adding new files
+To add a new file and have it automatically render into the tree view, create it under the docs folder.
+Be sure to specify the correct path.
 
 ## Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+This project can be hosted as a static site. Simply run `gatsby build` in your CI/CD and sync the files to a static host.
