@@ -1,24 +1,23 @@
-import React from "react";
+import React from "react"
 
 export default ({ data }) => {
-  const { markdownRemark } = data; // data.markdownRemark holds our post data
-  const { frontmatter, html } = markdownRemark;
+  const { frontmatter, html } =  data.markdownRemark
+
   return (
-    <div className="blog-post-container">
-      <div className="blog-post">
+    <div>
+      <div>
         <h1>{frontmatter.title}</h1>
         <h2>{frontmatter.date}</h2>
         <div
-          className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
     </div>
-  );
+  )
 }
 
 export const pageQuery = graphql`
-  query BlogPostByPath($path: String!) {
+  query DocsByPath($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
@@ -28,4 +27,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

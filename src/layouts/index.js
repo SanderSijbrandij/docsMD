@@ -45,7 +45,7 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
 
 TemplateWrapper.propTypes = {
   children: PropTypes.func,
