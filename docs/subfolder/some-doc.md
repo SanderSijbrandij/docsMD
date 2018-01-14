@@ -5,3 +5,8 @@ title: "Some doc"
 ---
 
 A doc inside a subfolder :O
+
+# title
+## title 2
+### title 3
+#### title 4

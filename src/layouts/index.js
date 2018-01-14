@@ -11,18 +11,11 @@ const TemplateWrapper = ({ data, children }) => (
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
     </Helmet>
     <Header />
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 1280,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0,
-        display: 'flex',
-        justifyContent: 'space-between'
-      }}
-    >
-      <Treeview data={data.allMarkdownRemark}/>
-      <main style={{ marginLeft: 20, flex: 1 }}>{children()}</main>
+    <div className="columns">
+      <div className="column is-one-fifth container is-fluid">
+        <Treeview data={data.allMarkdownRemark}/>
+      </div>
+      <main className="column container is-fluid">{children()}</main>
     </div>
   </div>
 )

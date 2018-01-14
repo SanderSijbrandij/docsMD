@@ -50,8 +50,8 @@ export default class Treeview extends Component {
 
       return (
         <li key={key}>
-          <Link to={path}>{title}</Link>
-          <ul>
+          <span className="menu-label"><Link to={path}>{title}</Link></span>
+          <ul className="menu-list">
             {Object.entries(newValue).map(this.renderNode)}
           </ul>
         </li>
@@ -59,8 +59,8 @@ export default class Treeview extends Component {
     } else {
       return (
         <li key={key}>
-          {key}
-          <ul>
+          <span className="menu-label">{key}</span>
+          <ul className="menu-list">
             {Object.entries(value).map(this.renderNode)}
           </ul>
         </li>
@@ -78,7 +78,6 @@ export default class Treeview extends Component {
 
     return (
       <aside className="menu">
-        <p className="menu-label">{this.props.data.edges.length} doc files found.</p>
         <ul className="menu-list">
           {Object.entries(docs).map(this.renderNode)}
         </ul>

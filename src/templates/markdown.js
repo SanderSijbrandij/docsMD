@@ -1,5 +1,6 @@
 import React from "react"
 import moment from 'moment'
+import Helmet from 'react-helmet'
 
 export default ({ data }) => {
   const { frontmatter, html } =  data.markdownRemark
@@ -14,9 +15,10 @@ export default ({ data }) => {
 
   return (
     <div>
+      <Helmet title={frontmatter.title} />
       <div>
-        <h1>{frontmatter.title}</h1>
-        <p>Updated: {lastUpdated}</p>
+        <h1 className="title">{frontmatter.title}</h1>
+        <h2 className="subtitle is-6">Updated: {lastUpdated}</h2>
         <div
           style={{ 
             borderTop: '1px solid #404040',
