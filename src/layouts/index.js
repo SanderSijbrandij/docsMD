@@ -4,17 +4,12 @@ import Helmet from 'react-helmet'
 
 import Header from '../components/Header'
 import Treeview from '../components/Treeview'
-import './index.css'
 
 const TemplateWrapper = ({ data, children }) => (
   <div>
-    <Helmet
-      title="Documentation"
-      meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
-      ]}
-    />
+    <Helmet title="Documentation">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+    </Helmet>
     <Header />
     <div
       style={{

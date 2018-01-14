@@ -77,13 +77,12 @@ export default class Treeview extends Component {
     console.log(docs)
 
     return (
-      <div style={{ maxWidth: 400 }}>
-        <strong>{this.props.data.edges.length} doc files found.</strong>
-        <br />
-        <ul>
+      <aside className="menu">
+        <p className="menu-label">{this.props.data.edges.length} doc files found.</p>
+        <ul className="menu-list">
           {Object.entries(docs).map(this.renderNode)}
         </ul>
-      </div>
+      </aside>
     )
   }
 }
